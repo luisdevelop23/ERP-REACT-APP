@@ -58,7 +58,7 @@ const ProductsGrid = () => {
   };
 
   useEffect(() => {
-    setAmountProducts(6);
+    // setAmountProducts(6);
   }, []);
 
   return (

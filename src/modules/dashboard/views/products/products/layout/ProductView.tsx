@@ -1,5 +1,5 @@
 import React from "react";
-import HigherTitle from "../../../components/HigherTitle";
+import HigherTitle from "../../../../components/HigherTitle";
 
 const ProductView = () => {
   return (

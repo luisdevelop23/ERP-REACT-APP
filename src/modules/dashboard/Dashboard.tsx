@@ -1,6 +1,8 @@
+import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import TopProfile from "./components/TopProfile";
-import ProductPage from "./pages/ProductPage";
+import DashboardPage from "./views/dashboard/DashboardPage";
+import ProductsRoutes from "./views/products/ProductsRoutes";
 
 const Dashboard = () => {
   return (
@@ -9,7 +11,18 @@ const Dashboard = () => {
         <NavBar />
         <div className="flex flex-col flex-1 h-full relative z-0">
           <TopProfile />
-          <ProductPage />
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            {/* <Route path="/ecommers/*" element={<ProductsRoutes />} /> */}
+            <Route path="/product/*" element={<ProductsRoutes />} />
+            <Route path="/users/*" element={<ProductsRoutes />} />
+            <Route path="/rolesandpermissions/*" element={<ProductsRoutes />} />
+            <Route path="/personal/*" element={<ProductsRoutes />} />
+            <Route path="/clients/*" element={<ProductsRoutes />} />
+            <Route path="/emails/*" element={<ProductsRoutes />} />
+            <Route path="/requests/*" element={<ProductsRoutes />} />
+            <Route path="/sales/*" element={<ProductsRoutes />} />
+          </Routes>
         </div>
       </div>
     </div>

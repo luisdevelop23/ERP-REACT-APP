@@ -1,5 +1,5 @@
-import Api from "../api/AxiosConfig.ts";
-import ProductIF from "../interface/product.interface.ts";
+import Api from "../../api/AxiosConfig.ts";
+import ProductIF from "../../interface/product.interface.ts";
 
 const getNewCod = async () => {
   try {

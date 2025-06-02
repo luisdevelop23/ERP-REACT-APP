@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Logo from "../../../ui/logo/Logo";
 import ButtomMode from "../../../ui/mode/ButtomMode";
+import { Link } from "react-router-dom";
 type itemString = {
   name: string;
   link: string;
@@ -21,7 +22,7 @@ const NavBar = () => {
 
   const toggleSection = (sectionId: string) => {
     let newSet: Set<string>;
-  
+
     if (collapsed) {
       // Si la misma sección está abierta, cerrarla
       if (openSections.has(sectionId)) {
@@ -37,14 +38,14 @@ const NavBar = () => {
         newSet.add(sectionId);
       }
     }
-  
+
     setOpenSections(newSet);
     setSelectedSection(sectionId);
   };
-  
+
   const toogleSelection = (select: string) => {
     setSelectedSection(select);
-  
+
     if (collapsed) {
       // Si ya está abierto, cerrarlo
       if (openSections.has(select)) {
@@ -60,13 +61,12 @@ const NavBar = () => {
       }
     }
   };
-  
+
   useEffect(() => {
     if (collapsed) {
       setOpenSections(new Set());
     }
   }, [collapsed]);
-
 
   const sections: SidebarItem[] = [
     {
@@ -98,8 +98,8 @@ const NavBar = () => {
       icon: "fluent-mdl2:product",
       color: "#7e7e8f",
       items: [
-        { name: "Productos", link: "/products" },
-        { name: "Inventario", link: "/inventory" },
+        { name: "Productos", link: "/product/products" },
+        { name: "Inventario", link: "/product/inventory" },
       ],
     },
     {
@@ -257,15 +257,18 @@ const NavBar = () => {
                     <div className="pt-2 pl-4">
                       <ul className="text-[0.9rem] font-semibold text-left space-y-1">
                         {section.items.map((item, index) => (
-                          <li
-                            key={index}
-                            className={`cursor-pointer ${
-                              isSelected
-                                ? "text-white/80 hover:text-white"
-                                : "text-gray-500/80 hover:text-black"
-                            }`}
-                          >
-                            {item.name}
+                          <li>
+                            <Link
+                              to={`/dashboard${item.link}`}
+                              key={index}
+                              className={`cursor-pointer ${
+                                isSelected
+                                  ? "text-white/80 hover:text-white"
+                                  : "text-gray-500/80 hover:text-black"
+                              }`}
+                            >
+                              {item.name}
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -291,6 +294,17 @@ const NavBar = () => {
         })}
       </div>
 
+      <div>
+        <div className="py-4 flex justify-center items-center">
+          <button className="flex justify-center items-center gap-2 text-gray-500 hover:bg-gray-300 py-2 px-4 rounded-lg transition-all duration-300 ease-in-out group-[.open]:bg-gray-100">
+            <Icon
+              icon="memory:logout"
+              className="size-6 group-[.open]:text-red-600 hover:text-red-600"
+            />
+            <h2 className="font-semibold">Cerrar Sesión</h2>
+          </button>
+        </div>
+      </div>
       <div className="py-4 flex justify-center items-center">
         {!collapsed && (
           <div className="bg-zinc-300 rounded-4xl">

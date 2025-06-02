@@ -1,10 +1,18 @@
-import { useState } from "react";
-import erpimg from "../../assets/ERP_IMG2.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useState } from "react";
+import logo from "../../assets/erp-logo-v3.webp";
+import erpimg from "../../assets/ERP_IMG2.png";
+import { useAuthContext } from "../../context/Auth/useAuthContext";
+import { login } from "../../services/auth/auth.service";
 const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [view, setView] = useState<boolean>(false);
+  const { VERIFY,LOGIN } = useAuthContext();
+
+  const handleLogin = async () => {
+    await LOGIN(username, password);
+  };
   return (
     <main>
       <div className="flex w-full  bg-gray-100 h-screen">
@@ -12,6 +20,7 @@ const Login = () => {
           <img src={erpimg} className="w-[650px] rounded-3xl" alt="" />
         </div>
         <div className="w-5/12 h-full flex flex-col  items-center justify-center">
+        <img src={logo} className="w-[200px]" alt="" />
           <h1 className="text-4xl text-center py-8 font-bold text-blue-500">
             METEOR-<span className="text-yellow-500">ERP</span>{" "}
           </h1>
@@ -25,7 +34,7 @@ const Login = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label className="text-lg font-semibold">Password</label> 
+              <label className="text-lg font-semibold">Password</label>
               <div className="relative">
                 <input
                   type={view ? "text" : "password"}
@@ -43,7 +52,7 @@ const Login = () => {
 
               <button
                 className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700"
-                type="submit"
+                onClick={handleLogin}
               >
                 Login
               </button>

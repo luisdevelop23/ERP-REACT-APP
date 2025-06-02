@@ -1,9 +1,9 @@
-import {Icon} from "@iconify/react/dist/iconify.js";
-import HigherTitle from "../components/HigherTitle";
-import ProductsList from "../views/products/products/components/ProductsList";
-import {useEffect, useState} from "react";
-import ProductsGrid from "../views/products/products/components/ProductGrid";
-import {useProductContext} from "../../../context/Product/useProductContext";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import HigherTitle from "../../../components/HigherTitle";
+import ProductsList from "./components/ProductsList";
+import { useEffect, useState } from "react";
+import ProductsGrid from "./components/ProductGrid";
+import { useProductContext } from "../../../../../context/Product/useProductContext";
 
 const ProductPage = () => {
   const { GETP } = useProductContext();
@@ -64,8 +64,7 @@ const ProductPage = () => {
       </header>
 
       {/* //!Render */}
-      <div className="flex flex-1 md:flex-col ">
-        {renderOPtion()}</div>
+      <div className="flex flex-1 md:flex-col ">{renderOPtion()}</div>
       {/* <ProductCardGrid /> */}
       {/* <NewProduct /> */}
     </main>

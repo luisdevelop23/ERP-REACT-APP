@@ -7,7 +7,7 @@ import {
   getNewCod,
   getProducts,
   updateProduct,
-} from "../../services/product.service";
+} from "../../services/product/product.service";
 import { Bounce, toast } from "react-toastify";
 
 //? Definir el tipo para el contexto
