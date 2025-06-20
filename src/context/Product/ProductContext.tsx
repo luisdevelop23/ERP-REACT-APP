@@ -54,7 +54,10 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({
         return
       }
       setProducts(response.data);
-      setcode(cod.data);
+      if(cod.data !== code){
+          console.log(cod.data);
+        setcode(cod.data);
+      }
       if (response.pages !== pages && response.pages !== 0) {
         setPages(response.pages);
       }
@@ -209,6 +212,7 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({
   useEffect(() => {
     GETP();
   }, [currentPage, amountProducts]);
+  
   return (
     <ProductContext.Provider
       value={{

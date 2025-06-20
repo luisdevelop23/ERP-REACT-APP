@@ -1,15 +1,15 @@
 import React from "react";
-import { ProductProvider } from "./Product/ProductContext"; 
+import { ProductProvider } from "./Product/ProductContext";
 import { AuthProvider } from "./Auth/AuthContext";
+import { UserProvider } from "./User/UserContext";
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <ProductProvider>
-      {/* Agrega más proveedores aquí si es necesario */}
-      <AuthProvider>
-      {children}
-      </AuthProvider>
-    </ProductProvider>
+    <AuthProvider>
+      <ProductProvider>
+        <UserProvider>{children}</UserProvider>
+      </ProductProvider>
+    </AuthProvider>
   );
 };
 

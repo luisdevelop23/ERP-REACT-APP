@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import TopProfile from "./components/TopProfile";
 import DashboardPage from "./views/dashboard/DashboardPage";
 import ProductsRoutes from "./views/products/ProductsRoutes";
+import UserRouter from "./views/users/UserRouter";
 
 const Dashboard = () => {
   return (
@@ -15,7 +16,7 @@ const Dashboard = () => {
             <Route path="/" element={<DashboardPage />} />
             {/* <Route path="/ecommers/*" element={<ProductsRoutes />} /> */}
             <Route path="/product/*" element={<ProductsRoutes />} />
-            <Route path="/users/*" element={<ProductsRoutes />} />
+            <Route path="/users/*" element={<UserRouter />} />
             <Route path="/rolesandpermissions/*" element={<ProductsRoutes />} />
             <Route path="/personal/*" element={<ProductsRoutes />} />
             <Route path="/clients/*" element={<ProductsRoutes />} />

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Logo from "../../../ui/logo/Logo";
 import ButtomMode from "../../../ui/mode/ButtomMode";
 import { Link } from "react-router-dom";
+import AuthContext from "../../../context/Auth/AuthContext";
 type itemString = {
   name: string;
   link: string;
@@ -16,6 +17,7 @@ type SidebarItem = {
 };
 
 const NavBar = () => {
+  const {LOGUOUT} = useContext(AuthContext);
   const [openSections, setOpenSections] = useState<Set<string>>(new Set());
   const [selectedSection, setSelectedSection] = useState<string>("dashboard");
   const [collapsed, setCollapsed] = useState(false);
@@ -108,9 +110,8 @@ const NavBar = () => {
       icon: "clarity:administrator-line",
       color: "#7e7e8f",
       items: [
-        { name: "Nuevo Usuario", link: "/newUser" },
-        { name: "Lista Usuarios", link: "/listUsers" },
-        { name: "Inicios de Sesión", link: "/logins" },
+        { name: "Usuarios", link: "/users/users" },
+        { name: "Inicios de Sesión", link: "/users/sessions" },
       ],
     },
     {
@@ -296,7 +297,7 @@ const NavBar = () => {
 
       <div>
         <div className="py-4 flex justify-center items-center">
-          <button className="flex justify-center items-center gap-2 text-gray-500 hover:bg-gray-300 py-2 px-4 rounded-lg transition-all duration-300 ease-in-out group-[.open]:bg-gray-100">
+          <button onClick={LOGUOUT} className="flex justify-center items-center gap-2 text-gray-500 hover:bg-gray-300 py-2 px-4 rounded-lg transition-all duration-300 ease-in-out group-[.open]:bg-gray-100">
             <Icon
               icon="memory:logout"
               className="size-6 group-[.open]:text-red-600 hover:text-red-600"

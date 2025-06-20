@@ -17,7 +17,7 @@ const HigherTitle: React.FC<Props> = ({ loc }) => {
             <div className="flex items-center">
               <Icon
                 icon={
-                  loc.name == "Home" ? "iconamoon:home" : "mingcute:right-fill"
+                  loc.name == "Home" || loc.name == "Inicio" ? "iconamoon:home" : "mingcute:right-fill"
                 }
                 className="pt-1 text-gray-600 h-5 w-5 "
               />

@@ -45,6 +45,7 @@ const refresh = async () => {
 const logout = async () => {
   try {
     const responde = await Api.post("/api/auth/logout");
+    console.log(responde)
     if (responde.status === 200) {
       return responde.data;
     }

@@ -48,7 +48,6 @@ const UpdateProductForm: React.FC<Props> = ({ item, close }) => {
   };
   const handleSubmit = async () => {
     if (!handleValidate()) return;
-    console.log("Producto actualizado:", updateProduct);
     const value: boolean = await UPDATEP(updateProduct as ProductIF);
     if (value === false) return;
     handleClose();

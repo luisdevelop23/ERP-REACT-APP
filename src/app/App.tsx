@@ -3,10 +3,10 @@ import { useAuthContext } from "../context/Auth/useAuthContext";
 import Login from "../modules/auth/Login";
 import Dashboard from "../modules/dashboard/Dashboard";
 import "./App.css";
+import ProtectedRoute from "../hooks/PrivateRoute";
 
 function App() {
   const { login, verify } = useAuthContext();
-  console.log(login, verify);
 
   return (
     <BrowserRouter>
@@ -17,13 +17,20 @@ function App() {
           element={login && verify ? <Navigate to="/dashboard" /> : <Login />}
         />
 
-        {/* Ruta protegida - solo accesible si el usuario está autenticado */}
+        {/* Rutas protegidas */}
         <Route
-          path="/dashboard/*"
-          element={verify ? <Dashboard /> : <Navigate to="/login" />}
-        />
+          element={
+            <ProtectedRoute
+              canActivate={login && verify}
+              redirectPath="/login"
+            />
+          }
+        >
+          {/* Aquí van todas las rutas que quieres proteger */}
+          <Route path="/dashboard/*" element={<Dashboard />} />
+        </Route>
 
-        {/* Redirección por defecto (redirigir al login si no hay ruta coincidente) */}
+        {/* Redirección por defecto */}
         <Route
           path="*"
           element={<Navigate to={login ? "/dashboard" : "/login"} />}

@@ -1,19 +1,13 @@
-import { Navigate, Route } from "react-router-dom";
-import { isAuthenticated } from "../plugins/js-cookie/js-cookie.plugin";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      element={
-        isAuthenticated() ? (
-          <Component />
-        ) : (
-          <Navigate to="/login" />
-        )
-      }
-    />
-  );
-};
+const ProtectedRoute = ({
+    canActivate,
+    redirectPath = '/'
+}) => {
+    if (!canActivate) {
+        return <Navigate to={redirectPath} replace />
+    }
+    return <Outlet />;
+}
 
-export default PrivateRoute;
+export default ProtectedRoute;

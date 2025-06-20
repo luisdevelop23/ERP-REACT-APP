@@ -6,12 +6,12 @@ import ProductsGrid from "./components/ProductGrid";
 import { useProductContext } from "../../../../../context/Product/useProductContext";
 
 const ProductPage = () => {
-  const { GETP } = useProductContext();
+  const { GETP, code } = useProductContext();
 
   const [options, setOption] = useState<string>("list");
   const loc = {
     tittle: "Todos Los Productos",
-    locs: [{ name: "Home" }, { name: "All Products" }],
+    locs: [{ name: "Inicio" }, { name: "Productos" }, { name: "Todos Los Productos" }],
   };
 
   const handleOption = (option: string) => {
@@ -31,7 +31,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     GETP();
-  }, []);
+  }, [code]);
 
   return (
     <main className="flex flex-col bg-gray-200 p-4  h-full overflow-y-auto md:overflow-y-hidden">

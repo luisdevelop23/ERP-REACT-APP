@@ -7,11 +7,16 @@ import React, {
   useState,
 } from "react";
 import { Bounce, toast } from "react-toastify";
-import { login as autenticación, verify as verifyToken } from "../../services/auth/auth.service";
+import {
+  login as autenticación,
+  logout,
+  verify as verifyToken,
+} from "../../services/auth/auth.service";
 
 interface AuthContextType {
   VERIFY: () => Promise<boolean>;
   LOGIN: (username: string, password: string) => void;
+  LOGUOUT: () => void;
   login: boolean;
   verify: boolean;
   loading: boolean;
@@ -102,12 +107,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
+  const LOGUOUT = async () => {
+    try {
+      const response = await logout();
+      if (response.result === true) {
+        
+        window.location.href = "/login";
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // ? auto ejecucion
+
   useEffect(() => {
     VERIFY();
   }, [VERIFY]);
 
   return (
-    <AuthContext.Provider value={{ VERIFY, LOGIN, login, verify, loading }}>
+    <AuthContext.Provider
+      value={{ VERIFY, LOGIN, LOGUOUT, login, verify, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
