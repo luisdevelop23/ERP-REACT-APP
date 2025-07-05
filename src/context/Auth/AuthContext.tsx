@@ -33,6 +33,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [login, setLogin] = useState(false);
   const [verify, setVerify] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [myInformation, setMyInformation] = useState({});
 
   const LOGIN = async (username: string, password: string) => {
     setLoading(true);
@@ -66,7 +67,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return;
       }
       const responser = await autenticación(username, password);
-      console.log(responser);
       if (responser?.status === 200 && responser?.data?.result) {
         toast("Acceso correcto, redirigiendo...", {
           position: "top-center",
@@ -79,7 +79,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           theme: "light",
           transition: Bounce,
         });
-        window.location.href = "/dashboard";
+        setLogin(true)
+        setMyInformation(responser.data.data);
+        setLoading(false);
+        window.location.href = "/";
       }
     } catch (error) {}
   };
@@ -92,18 +95,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (response.result === true && response.data) {
         setVerify(true);
         setLogin(true);
+        setLoading(false);
         return true;
       } else {
         setLogin(false);
         setVerify(false);
+        setLoading(false);
         window.location.href = "/login";
         return false;
       }
     } catch (error) {
       setLogin(false);
+      setVerify(false);
+      setLoading(false);
       return false;
     } finally {
       setLoading(false);
+      return false;
     }
   }, []);
 
@@ -111,7 +119,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await logout();
       if (response.result === true) {
-        
         window.location.href = "/login";
       }
     } catch (error) {
@@ -122,6 +129,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // ? auto ejecucion
 
   useEffect(() => {
+    setLoading(true);
     VERIFY();
   }, [VERIFY]);
 

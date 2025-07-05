@@ -9,8 +9,8 @@ const ProductRoutes = () => {
       <Route index element={<Navigate to="products" replace />} />
 
       {/* Hijos anidados */}
-      <Route path="products" element={<ProductPage />} />
-      <Route path="inventory" element={<InventoryPage />} />
+      <Route path="lista_productos" element={<ProductPage />} />
+      <Route path="inventario" element={<InventoryPage />} />
 
       {/* Ruta catch all - opcional */}
       <Route path="*" element={<ProductPage />} />

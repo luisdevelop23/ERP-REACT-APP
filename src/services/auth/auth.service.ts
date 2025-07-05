@@ -8,6 +8,7 @@ const login = async (username: string, password: string) => {
       username,
       password,
     });
+    console.log(responde)
     if(responde.status === 200){
       return responde;
     }

@@ -17,7 +17,7 @@ const getProducts = async (page: number, amount: number) => {
     const responde = await Api.get(
       `api/product/?page=${page}&amount=${amount}`
     );
-    if (responde.status === 200) {
+    if (responde.status === 200 || responde.status === 204) {
       return responde.data;
     }
   } catch (error) { 
@@ -42,7 +42,6 @@ const createProduct = async (product: ProductIF) => {
   try {
     console.log(product);
     const response = await Api.post("/api/product", product);
-
     if (response.status === 201) {
       return response;
     }

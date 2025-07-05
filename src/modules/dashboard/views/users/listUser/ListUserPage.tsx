@@ -1,7 +1,10 @@
+import { useEffect } from "react";
+import { useUserContext } from "../../../../../context/User/useUserContext";
 import HigherTitle from "../../../components/HigherTitle";
 import UsersList from "./components/UsersList";
 
 const ListUserPage = () => {
+  const {GETUSERS} = useUserContext();
   const loc = {
     tittle: "Todos Los Usuarios",
     locs: [
@@ -10,6 +13,11 @@ const ListUserPage = () => {
       { name: "Todos Los Usuarios" },
     ],
   };
+
+
+  useEffect(() => {
+    GETUSERS();
+  }, []);
 
   return (
     <main className="flex flex-col bg-gray-200 p-4  h-full overflow-y-auto md:overflow-y-hidden">

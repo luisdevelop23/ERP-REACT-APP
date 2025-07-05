@@ -9,8 +9,8 @@ const UserRouter = () => {
       <Route index element={<Navigate to="users" replace />} />
 
       {/* Hijos anidados */}
-      <Route path="users" element={<ListUserPage />} />
-      <Route path="sessions" element={<SessionsPage />} />
+      <Route path="lista_usuarios" element={<ListUserPage />} />
+      <Route path="sesiones" element={<SessionsPage />} />
     </Routes>
   );
 };

@@ -77,9 +77,7 @@ const NavBar = () => {
       icon: "hugeicons:dashboard-square-02",
       color: "#7e7e8f",
       items: [
-        { name: "Dashboard", link: "/dashboard" },
-        { name: "Dashboard 2", link: "/dashboard2" },
-        { name: "Dashboard 3", link: "/dashboard3" },
+        { name: "Dashboard", link: "/panel" },
       ],
     },
     {
@@ -88,10 +86,10 @@ const NavBar = () => {
       icon: "solar:sale-outline",
       color: "#7e7e8f",
       items: [
-        { name: "Publicaciones", link: "/allPosts" },
-        { name: "Nueva Publicación", link: "/newPost" },
-        { name: "Detalle Productos", link: "/detailProducts" },
-        { name: "Productos No Publicados", link: "/unpublishedProducts" },
+        { name: "Publicaciones", link: "/publicaciones" },
+        { name: "Nueva Publicación", link: "/nueva_publicacion" },
+        { name: "Detalle Productos", link: "/detalle_productos" },
+        { name: "Productos No Publicados", link: "/productos_no_publicados" },
       ],
     },
     {
@@ -100,8 +98,8 @@ const NavBar = () => {
       icon: "fluent-mdl2:product",
       color: "#7e7e8f",
       items: [
-        { name: "Productos", link: "/product/products" },
-        { name: "Inventario", link: "/product/inventory" },
+        { name: "Productos", link: "/productos/lista_productos" },
+        { name: "Inventario", link: "/productos/inventario" },
       ],
     },
     {
@@ -110,8 +108,8 @@ const NavBar = () => {
       icon: "clarity:administrator-line",
       color: "#7e7e8f",
       items: [
-        { name: "Usuarios", link: "/users/users" },
-        { name: "Inicios de Sesión", link: "/users/sessions" },
+        { name: "Usuarios", link: "/usuarios/lista_usuarios" },
+        { name: "Inicios de Sesión", link: "/usuarios/sesiones" },
       ],
     },
     {
@@ -121,8 +119,8 @@ const NavBar = () => {
       color: "#7e7e8f",
       items: [
         { name: "Roles", link: "/roles" },
-        { name: "Permisos", link: "/permissions" },
-        { name: "Asignar Permisos", link: "/assignPermissions" },
+        { name: "Permisos", link: "/permisos" },
+        { name: "Asignar Permisos", link: "/asignacion_permisos" },
       ],
     },
     {
@@ -131,8 +129,8 @@ const NavBar = () => {
       icon: "radix-icons:person",
       color: "#7e7e8f",
       items: [
-        { name: "Nuevo Personal", link: "/newPersonal" },
-        { name: "Lista Personal", link: "/listPersonal" },
+        { name: "Nuevo Personal", link: "/nuevo_personal" },
+        { name: "Lista Personal", link: "/lista_personal" },
       ],
     },
     {
@@ -141,9 +139,9 @@ const NavBar = () => {
       icon: "material-symbols-light:server-person-outline-sharp",
       color: "#7e7e8f",
       items: [
-        { name: "Lista Clientes", link: "/listClients" },
-        { name: "Nuevo Cliente", link: "/newClient" },
-        { name: "Correos Enviados", link: "/newClientMails" },
+        { name: "Lista Clientes", link: "/lista_clientes" },
+        { name: "Nuevo Cliente", link: "/nuevo_cliente" },
+        { name: "Correos Enviados", link: "/nuevo_clientes_mails" },
       ],
     },
     {
@@ -152,10 +150,10 @@ const NavBar = () => {
       icon: "mage:email",
       color: "#7e7e8f",
       items: [
-        { name: "Nuevo Correo", link: "/newEmail" },
-        { name: "Lista Correos", link: "/listEmails" },
-        { name: "Plantillas", link: "/templates" },
-        { name: "Enviar Correo", link: "/sendEmail" },
+        { name: "Nuevo Correo", link: "/nuevo_correo" },
+        { name: "Lista Correos", link: "/lista_correos" },
+        { name: "Plantillas", link: "/plantillas" },
+        { name: "Enviar Correo", link: "/correos_enviados" },
       ],
     },
     {
@@ -164,8 +162,8 @@ const NavBar = () => {
       icon: "bi:list-ol",
       color: "#7e7e8f",
       items: [
-        { name: "Lista Peticiones", link: "/listRequests" },
-        { name: "Lista Respuestas", link: "/listResponses" },
+        { name: "Lista Peticiones", link: "/lista_peticiones" },
+        { name: "Lista Respuestas", link: "/lista_respuestas" },
       ],
     },
     {
@@ -174,9 +172,9 @@ const NavBar = () => {
       icon: "hugeicons:wallet-02",
       color: "#7e7e8f",
       items: [
-        { name: "Nueva Venta", link: "/newSale" },
-        { name: "Lista Ventas", link: "/listSales" },
-        { name: "Cuotas", link: "/quotes" },
+        { name: "Nueva Venta", link: "/nueva_venta" },
+        { name: "Lista Ventas", link: "/lista_ventas" },
+        { name: "Cuotas", link: "/cuotas" },
         { name: "Proformas", link: "/proformas" },
         { name: "Facturas", link: "/invoices" },
       ],
@@ -260,7 +258,7 @@ const NavBar = () => {
                         {section.items.map((item, index) => (
                           <li>
                             <Link
-                              to={`/dashboard${item.link}`}
+                              to={`/panel${item.link}`}
                               key={index}
                               className={`cursor-pointer ${
                                 isSelected
