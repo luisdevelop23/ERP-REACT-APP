@@ -1,12 +1,17 @@
 import { Icon } from '@iconify/react'
 import userimg from '../../../assets/user_m_mini.png'
+import { useAuthContext } from '../../../context/Auth/useAuthContext';
 
 const TopProfile = () => {
+  const {myInformation} = useAuthContext();
+  
+  const { user_name } = myInformation;
+
   return (
     <header className="bg-white w-full py-4 px-4 md:px-8 flex items-center justify-between flex-wrap gap-4 shadow z-10">
       {/* Saludo: oculto en móvil */}
       <div className="hidden md:block text-lg md:text-2xl text-gray-600 font-semibold flex-1 min-w-[200px]">
-        Hola <span className="font-bold">"Usuario"</span>, bienvenido
+        Hola <span className="font-bold">{user_name}</span>, bienvenido
       </div>
 
       {/* Iconos y avatar */}

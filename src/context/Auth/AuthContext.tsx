@@ -6,7 +6,9 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import { UserIF } from "../../interface/user.interface";
 import {
   login as autenticación,
   logout,
@@ -20,6 +22,7 @@ interface AuthContextType {
   login: boolean;
   verify: boolean;
   loading: boolean;
+  myInformation: UserIF | any;
 }
 
 // Crear contexto con valores iniciales undefined para forzar uso dentro del provider
@@ -33,7 +36,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [login, setLogin] = useState(false);
   const [verify, setVerify] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [myInformation, setMyInformation] = useState({});
+  const [myInformation, setMyInformation] = useState<UserIF | any>({});
+
 
   const LOGIN = async (username: string, password: string) => {
     setLoading(true);
@@ -79,10 +83,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           theme: "light",
           transition: Bounce,
         });
-        setLogin(true)
+        setLogin(true);
         setMyInformation(responser.data.data);
         setLoading(false);
-        window.location.href = "/";
       }
     } catch (error) {}
   };
@@ -101,7 +104,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setLogin(false);
         setVerify(false);
         setLoading(false);
-        window.location.href = "/login";
         return false;
       }
     } catch (error) {
@@ -119,15 +121,40 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await logout();
       if (response.result === true) {
-        window.location.href = "/login";
+        setLogin(false);
+        setVerify(false);
+        setMyInformation({});
+        toast.success("Sesión cerrada correctamente", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error en LOGOUT:", error);
+      toast.error("Error al cerrar sesión", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
-  // ? auto ejecucion
-
+  //? Verificación automática al cargar la aplicación
   useEffect(() => {
     setLoading(true);
     VERIFY();
@@ -135,7 +162,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ VERIFY, LOGIN, LOGUOUT, login, verify, loading }}
+      value={{ VERIFY, LOGIN, LOGUOUT, login, verify, loading, myInformation }}
     >
       {children}
     </AuthContext.Provider>
